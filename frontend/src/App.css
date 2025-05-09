@@ -1,0 +1,329 @@
+
+  /* General Styles */
+  .dashboard-container {
+    min-height: 100vh;
+    background-color: #f9fafb;
+    padding: 32px 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  
+  /* Header Styles */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 8px;
+  }
+  
+  .header p {
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Connection Panel */
+  .connection-panel {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .panel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  @media (min-width: 768px) {
+    .panel-content {
+      flex-direction: row;
+    }
+  }
+  
+  .panel-title {
+    margin-bottom: 16px;
+  }
+  
+  @media (min-width: 768px) {
+    .panel-title {
+      margin-bottom: 0;
+    }
+  }
+  
+  .panel-title h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 4px;
+  }
+  
+  .panel-title p {
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  .input-group {
+    display: flex;
+    width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .input-group {
+      width: auto;
+    }
+  }
+  
+  .input-field {
+    flex: 1;
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-right: 8px;
+  }
+  
+  @media (min-width: 768px) {
+    .input-field {
+      width: 250px;
+    }
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+  }
+  
+  .connect-button {
+    padding: 8px 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: white;
+    background-color: #2563eb;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+  }
+  
+  .connect-button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .connect-button:disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+  }
+  
+  .button-icon {
+    margin-right: 8px;
+  }
+  
+  .connection-status {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #10b981;
+  }
+  
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10b981;
+    margin-right: 8px;
+  }
+  
+  /* Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  @media (min-width: 768px) {
+    .cards-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  /* Status Card */
+  .status-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    height: 100%;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  .card-icon-wrapper {
+    margin-right: 12px;
+    background-color: #eff6ff;
+    padding: 8px;
+    border-radius: 50%;
+  }
+  
+  .card-icon {
+    color: #2563eb;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  /* Status Items */
+  .status-group {
+    margin-bottom: 16px;
+  }
+  
+  .status-item-container {
+    background-color: #eff6ff;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  
+  .status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+  }
+  
+  .status-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .status-indicator-label {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 9999px;
+  }
+  
+  .status-normal {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  
+  .status-alert {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  
+  /* Toggle Button */
+  .toggle-button {
+    position: relative;
+    display: inline-flex;
+    height: 24px;
+    width: 44px;
+    align-items: center;
+    border-radius: 9999px;
+    transition: background-color 0.2s;
+    background-color: #e5e7eb;
+    cursor: pointer;
+  }
+  
+  .toggle-button.active {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .toggle-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .toggle-knob {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    transform: translateX(4px);
+  }
+  
+  .toggle-button.active .toggle-knob {
+    transform: translateX(24px);
+  }
+  
+  /* Grid Layout for Status Indicators */
+  .indicators-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  /* Empty State */
+  .empty-state {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+    text-align: center;
+  }
+  
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    color: #9ca3af;
+    margin: 0 auto 16px;
+  }
+  
+  .empty-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1f2937;
+    margin-bottom: 8px;
+  }
+  
+  .empty-text {
+    color: #6b7280;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 14px;
+    color: #6b7280;
+  }
