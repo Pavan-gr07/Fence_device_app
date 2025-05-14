@@ -196,10 +196,8 @@ function App() {
         return;
       }
 
-      await fetch(`http://192.168.100.153
-        
-        :3002/tcp?ip=${ip}&key=${commandKey}`);
-
+      await fetch(`http://192.168.100.153:3002/tcp?ip=${ip}&key=${commandKey}`);
+      console.log("first")
       // Refetch updated TCP data
       await fetchData();
 
