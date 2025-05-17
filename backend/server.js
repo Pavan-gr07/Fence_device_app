@@ -11,7 +11,7 @@ app.use(cors({
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 }));
-const PORT = 3002;
+const PORT = 30002;
 
 // ✅ HTTP XML Proxy
 app.get('/http-status', (req, res) => {

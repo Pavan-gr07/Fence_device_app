@@ -103,7 +103,7 @@ function App() {
 
     try {
       // Fetch HTTP data
-      const httpResponse = await fetch(`http://192.168.100.153:3002/http-status?ip=${ip}`);
+      const httpResponse = await fetch(`http://localhost:30002/http-status?ip=${ip}`);
       const text = await httpResponse.text();
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(text, 'text/xml');
@@ -114,9 +114,12 @@ function App() {
       setHttpData(parsedHttpData);
 
       // Fetch TCP data
-      const tcpRes = await fetch(`http://192.168.100.153:3002/tcp-status?ip=${ip}`);
+      const tcpRes = await fetch(`http://localhost:30002/tcp-status?ip=${ip}`);
       const tcpJson = await tcpRes.json();
       setTcpData(tcpJson.bufferData);
+      if (httpResponse || tcpJson) {
+        return httpResponse || tcpJson
+      }
     } catch (err) {
       console.error('Error fetching data:', err);
       setConnected(false);
@@ -158,7 +161,7 @@ function App() {
     try {
       // await fetch(`http://localhost:3002/http?ip=${ip}?key=${key}`);
       // await fetch(`http://${ip}/leds.cgi?led=${key}`)
-      await axios.get(`http://192.168.100.153:3002/http`, {
+      await axios.get(`http://localhost:30002/http`, {
         params: { ip, key }
       });
 
@@ -196,7 +199,7 @@ function App() {
         return;
       }
 
-      await fetch(`http://192.168.100.153:3002/tcp?ip=${ip}&key=${commandKey}`);
+      await fetch(`http://localhost:30002/tcp?ip=${ip}&key=${commandKey}`);
       console.log("first")
       // Refetch updated TCP data
       await fetchData();
@@ -287,7 +290,7 @@ function App() {
 
             </div>
 
-            {connected && (
+            {connected && (httpData || tcpData) && (
               <div className="connection-status">
                 <div className="status-indicator"></div>
                 Connected to {ip}
