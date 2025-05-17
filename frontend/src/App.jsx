@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 import axios from 'axios'
+import { Switch } from '@mui/material';
 
 
 // Simple SVG Icons
@@ -63,18 +64,17 @@ const StatusCard = ({ title, icon, children }) => (
 );
 
 const StatusButton = ({ active, onClick, disabled }) => (
-  <button
-    onClick={onClick}
+  <Switch
+    checked={active}
+    onChange={onClick}
     disabled={disabled}
-    className={`toggle-button ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
-  >
-    {active ? 'ON' : 'OFF'}
-  </button>
+    color="primary"
+    inputProps={{ 'aria-label': 'toggle switch' }}
+  />
 );
 
 const StatusItem = ({ label, value, isToggle, onToggle, disabled }) => {
-  const status = value === '1' || value === 1 || value === true;
-
+  const status = checkBit(value)
   return (
     <div className="status-item">
       <span className="status-label">{label}</span>
@@ -89,6 +89,11 @@ const StatusItem = ({ label, value, isToggle, onToggle, disabled }) => {
   );
 };
 
+const checkBit = (value) => {
+  const status = value === '1' || value === 1 || value === true;
+  return status
+}
+
 function App() {
   const [ip, setIp] = useState('');
   const [httpData, setHttpData] = useState(null);
@@ -97,7 +102,6 @@ function App() {
   const [connected, setConnected] = useState(false);
   const [refreshInterval, setRefreshInterval] = useState(5000); // 5 seconds
 
-  console.log(tcpData, "TCPDATA")
   const fetchData = async () => {
     if (!ip || !connected) return;
 
@@ -188,6 +192,14 @@ function App() {
           1: 'SERVICE_MODE_OFF',
           0: 'SERVICE_MODE_ON',
         },
+        Posponed: {
+          1: 'SERVICE_MODE_OFF',
+          0: 'SERVICE_MODE_ON',
+        },
+        AlarmStatus: {
+          1: 'ACKNOWLEDGE',
+          0: 'ACKNOWLEDGE',
+        },
       };
 
       // Convert to number in case it's a string like "1" or "0"
@@ -270,7 +282,7 @@ function App() {
                     type="text"
                     value={ip}
                     onChange={handleIpChange}
-                    placeholder="192.168.100.63"
+                    placeholder="IP address "
                     className="input-field"
                     maxLength={15} // 255.255.255.255
                   />
@@ -301,6 +313,9 @@ function App() {
           {/* Status Cards Grid */}
           {(httpData || tcpData) && (
             <div className="cards-grid">
+
+
+
               {/* HTTP Status Card */}
               <StatusCard title="HTTP Status Controls" icon={<Icons.Shield />}>
                 <div className="status-group">
@@ -322,15 +337,28 @@ function App() {
                   </div>
                   <div className="status-item-container">
                     <StatusItem
-                      label="Service Mode"
+                      label="Acknowledge"
+                      value={httpData?.IntrusionAlarm}
+                      isToggle
+                      disabled={!checkBit(httpData?.IntrusionAlarm || httpData?.DrainageIntrusionAlarm)}
+                      onToggle={() => handleToggle('HTTP', '3')}
+                    />
+                  </div>
+                  <div className="status-item-container">
+                    <StatusItem
+                      label="Postpone"
                       value={httpData?.ServiceMode}
                       isToggle
-                      disabled
-                      onToggle={() => handleToggle('HTTP', '3')}
+                      disabled={!checkBit(httpData?.IntrusionAlarm || httpData?.DrainageIntrusionAlarm)}
+                      onToggle={() => handleToggle('HTTP', '4')}
                     />
                   </div>
                 </div>
               </StatusCard>
+
+
+
+
 
               {/* TCP Status Card */}
               <StatusCard title="TCP Status Controls" icon={<Icons.Zap />}>
@@ -357,6 +385,24 @@ function App() {
                       value={tcpData?.ServiceMode}
                       isToggle
                       onToggle={() => handleToggleTcp('TCP', 'ServiceMode')}
+                    />
+                  </div>
+                  <div className="status-item-container">
+                    <StatusItem
+                      label="Acknowledge"
+                      value={tcpData?.ServiceMode}
+                      isToggle
+                      disabled={!checkBit(tcpData?.AlarmStatus || tcpData?.DrinageIntrusion)}
+                      onToggle={() => handleToggleTcp('TCP', 'AlarmStatus')}
+                    />
+                  </div>
+                  <div className="status-item-container">
+                    <StatusItem
+                      label="Postpone"
+                      value={tcpData?.ServiceMode}
+                      isToggle
+                      disabled={!checkBit(tcpData?.AlarmStatus || tcpData?.DrinageIntrusion)}
+                      onToggle={() => handleToggleTcp('TCP', 'AlarmStatus')}
                     />
                   </div>
                 </div>
